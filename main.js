@@ -1,44 +1,5 @@
-let strings = [
-  "ASSURANCE",
-  "CYBERSECURITY",
-  "INFINITY",
-  "SAMPLING",
-  "MORNING",
-  "EXAMINATION",
-  "MASTER",
-  "SYSTEM",
-  "VISUAL STUDIO",
-  "BACHELOR OF SCIENCE IN INFORMATION TECHNOLOGY",
-];
-
-let alphabet = [
-  "A",
-  "B",
-  "C",
-  "D",
-  "E",
-  "F",
-  "G",
-  "H",
-  "I",
-  "J",
-  "K",
-  "L",
-  "M",
-  "N",
-  "O",
-  "P",
-  "Q",
-  "R",
-  "S",
-  "T",
-  "U",
-  "V",
-  "W",
-  "X",
-  "Y",
-  "Z",
-];
+let strings = require("./strings");
+let alphabet = require("./alphabet");
 
 function caesarEncrypt(word, shift) {
   let newWord = "";
@@ -57,4 +18,4 @@ function caesarEncrypt(word, shift) {
   return newWord;
 }
 
-strings.forEach((string) => console.log(caesarDecrypt(string, 3)));
+strings.forEach((string) => console.log(caesarEncrypt(string, 3)));
