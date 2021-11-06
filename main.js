@@ -54,6 +54,21 @@ function giovanniEncrypt(word, keyLetter, keyword) {
   return encrypt(shiftedAlphabet, word);
 }
 
+function transpositionEncrypt(word) {
+  let left = "";
+  let right = "";
+  word = word.replace(/ /g, "");
+  for (let i = 0; i < word.length; i++) {
+    if (word[i] == " ") continue;
+    if (i % 2 == 0) {
+      left += word[i];
+    } else {
+      right += word[i];
+    }
+  }
+  return left + right;
+}
+
 function encrypt(shiftedAlphabet, word) {
   let newWord = "";
   for (let i = 0; i < word.length; i++) {
@@ -67,12 +82,13 @@ function encrypt(shiftedAlphabet, word) {
   return newWord;
 }
 
-// strings.forEach((string) => console.log(caesarEncrypt(string, 3)));
-// strings.forEach((string) => console.log(keywordEncrypt(string, "METHODS")));
-// strings.forEach((string) =>
-//   console.log(giovanniEncrypt(string, "C", "METHODS"))
-// );
-
-// console.log(caesarEncrypt("DEFEND THE EAST WALL OF THE CASTLE", 1));
-// console.log(keywordEncrypt("UNIVERSITY", "COLEG"));
-// console.log(giovanniEncrypt("UNIVERSITY", "P", "COLEG"));
+console.log("\nCaesar ==============");
+strings.forEach((string) => console.log(caesarEncrypt(string, 3)));
+console.log("\nKeyword ==============");
+strings.forEach((string) => console.log(keywordEncrypt(string, "METHODS")));
+console.log("\nGiovanni ==============");
+strings.forEach((string) =>
+  console.log(giovanniEncrypt(string, "C", "METHODS"))
+);
+console.log("\nRail fence referrence ==============");
+strings.forEach((string) => console.log(transpositionEncrypt(string)));
