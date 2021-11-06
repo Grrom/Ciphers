@@ -11,7 +11,6 @@ function caesarEncrypt(word, shift) {
 }
 
 function keywordEncrypt(word, keyword) {
-  let newWord = "";
   let shiftedAlphabet = alphabet.slice();
   for (let i = 0; i < keyword.length; i++) {
     shiftedAlphabet.splice(i, 0, keyword[i]);
@@ -22,6 +21,35 @@ function keywordEncrypt(word, keyword) {
     }
   }
   shiftedAlphabet = shiftedAlphabet.filter((value) => value !== null);
+
+  return encrypt(shiftedAlphabet, word);
+}
+
+function giovanniEncrypt(word, keyLetter, keyword) {
+  let keyLetterIndex = alphabet.indexOf(keyLetter);
+  let shiftedAlphabet = alphabet.slice();
+  for (let i = 0; i < keyword.length; i++) {
+    shiftedAlphabet.splice(i, 0, keyword[i]);
+  }
+  for (let i = keyword.length; i < shiftedAlphabet.length; i++) {
+    if (keyword.includes(shiftedAlphabet[i])) {
+      shiftedAlphabet[i] = null;
+    }
+  }
+  shiftedAlphabet = shiftedAlphabet.filter((value) => value !== null);
+
+  let rightSideLength = alphabet.length - (keyLetterIndex + keyword.length);
+  let rightSide = shiftedAlphabet.slice(
+    keyword.length,
+    keyword.length + rightSideLength
+  );
+
+  let leftSide = shiftedAlphabet.slice(
+    shiftedAlphabet.indexOf(rightSide[rightSide.length - 1]) + 1,
+    shiftedAlphabet.length
+  );
+
+  shiftedAlphabet = leftSide.concat(keyword.split("")).concat(rightSide);
 
   return encrypt(shiftedAlphabet, word);
 }
@@ -39,8 +67,12 @@ function encrypt(shiftedAlphabet, word) {
   return newWord;
 }
 
-strings.forEach((string) => console.log(caesarEncrypt(string, 3)));
-strings.forEach((string) => console.log(keywordEncrypt(string, "METHODS")));
+// strings.forEach((string) => console.log(caesarEncrypt(string, 3)));
+// strings.forEach((string) => console.log(keywordEncrypt(string, "METHODS")));
+// strings.forEach((string) =>
+//   console.log(giovanniEncrypt(string, "C", "METHODS"))
+// );
 
 // console.log(caesarEncrypt("DEFEND THE EAST WALL OF THE CASTLE", 1));
 // console.log(keywordEncrypt("UNIVERSITY", "COLEG"));
+// console.log(giovanniEncrypt("UNIVERSITY", "P", "COLEG"));
